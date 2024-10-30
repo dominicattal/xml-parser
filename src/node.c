@@ -5,6 +5,7 @@ Node* node_create(node_t type)
 {
     Node* node = malloc(sizeof(Node));
     node->type = type;
+    node->num_children = node->data_length = 0;
     return node;
 }
 

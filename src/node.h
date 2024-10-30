@@ -1,5 +1,7 @@
 #pragma once
 
+#define MAX_LENGTH 100
+
 typedef enum {
     TEXT_NODE,
     ATTR_NODE,
@@ -10,7 +12,8 @@ typedef struct Node Node;
 
 typedef struct Node {
     node_t type;
-    int num_children;
+    int num_children, data_length;
+    char data[MAX_LENGTH+1];
     Node* children[10];
 } Node;
 

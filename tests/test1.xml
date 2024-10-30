@@ -1,6 +1,6 @@
 <bookstore>
     <book>
-        <title>Book1</price>
+        <title>Book1</title>
         <price>$5.23</price>
     </book>
     <book>
