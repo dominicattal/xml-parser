@@ -2,7 +2,7 @@ export TEMP := ./.git/info/tmp
 export TMP := ./.git/info/tmp
 
 CC=gcc
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra -Werror -O3
 NAME=parser
 SRC_DIR=src
 BIN_DIR=bin
