@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 
     DOM* dom = dom_init();
     dom_parse(dom, argv[1]);
+    dom_print(dom);
 
     return 0;
 }

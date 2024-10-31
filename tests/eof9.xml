@@ -1,0 +1,12 @@
+<bookstore>
+    <book>
+        <title>Book1</title>
+        <price>$5.23</price>
+    </book>
+    <book>
+        <title>Book2</title>
+        <price>$6.74</price>
+    </book>
+    <book>
+        <title>Book3</title>
+        <price>$12.33</price>

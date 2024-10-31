@@ -4,7 +4,6 @@
 
 typedef enum {
     TEXT_NODE,
-    ATTR_NODE,
     ELMT_NODE
 } node_t;
 
