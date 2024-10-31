@@ -47,7 +47,38 @@ static parser_t parser_helper(FILE* fptr)
         return ret;
     }
     c = fgetc(fptr);
-    if (c != '/') {
+    if (c == '/') {
+        // closing tag
+        ret.state = CLOSING_STATE;
+        for (c = fgetc(fptr); c != EOF && c != '>'; c = fgetc(fptr))
+            if (i < MAX_LENGTH)
+                ret.data[i++] = c;
+        ret.data[i] = '\0';
+        if (c == EOF)
+            ret.state = EOF_STATE;
+    } else if (c == '!') {
+        // comment
+        for (int i = 0; i < 2; i++) {
+            if ((c = fgetc(fptr)) != '-') {
+                puts("Invalid comment");
+                exit(1);
+            }
+        }
+        int dashes = 0;
+        while ((c = fgetc(fptr)) != EOF && dashes != 2) {
+            if (c == '-')
+                dashes++;
+            else
+                dashes = 0;
+        }
+
+        if (c != '>') {
+            puts("Invalid comment");
+            exit(1);
+        }
+
+        ret = parser_helper(fptr);
+    } else {
         // opening tag
         ret.node = node_create(ELMT_NODE);
         ret.node->data[i++] = c;
@@ -72,15 +103,6 @@ static parser_t parser_helper(FILE* fptr)
             printf("Mismatched closing tag for: %s\n", ret.node->data);
             exit(1);
         }
-    } else {
-        // closing tag
-        ret.state = CLOSING_STATE;
-        for (c = fgetc(fptr); c != EOF && c != '>'; c = fgetc(fptr))
-            if (i < MAX_LENGTH)
-                ret.data[i++] = c;
-        ret.data[i] = '\0';
-        if (c == EOF)
-            ret.state = EOF_STATE;
     }
     return ret;
 }
